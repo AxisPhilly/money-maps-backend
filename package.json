@@ -1,0 +1,7 @@
+{
+  "name": "money-maps-backend",
+  "dependencies": {
+    "mongoose": "~3.6.15",
+    "express": "~3.3.4"
+  }
+}
