@@ -1,4 +1,4 @@
 money-maps-backend
 ==================
 
-Backend server for [money-maps](github.com/AxisPhilly/money-maps)
+Backend server for [money-maps](http://www.github.com/AxisPhilly/money-maps)
