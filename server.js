@@ -1,24 +1,26 @@
 var express = require('express'),
-    fs = require('fs');
+    fs = require('fs'),
+    models = require('./models'),
+    Contribution = models.Contribution;
 
 var app = express();
 
 app.get('/contribution/:slug/:year/:location', function(req, res){
-  var locationType = '';
+  var searchTerms = {
+    slug: req.params.slug,
+    year: req.params.year
+  };
 
   if (!Number(req.params.location) && req.params.location.length == 2) {
-    locationType = 'state';
+    searchTerms.state = req.params.location;
   } else if (Number(req.params.location)) {
-    locationType = 'ward';
+    searchTerms.ward = req.params.location;
   } else {
-    locationType = 'county';
+    searchTerms.county = req.params.location;
   }
 
-  res.send({
-    slug: req.params.slug,
-    year: req.params.year,
-    location: req.params.location,
-    locationType: locationType
+  Contribution.find(searchTerms, function(err, docs) {
+    res.send(docs);
   });
 });
 

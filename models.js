@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-    mongoose.connect(process.env.MONGOLAB_URI);
+    mongoose.connect('mongodb://localhost/cf-test-v1'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
