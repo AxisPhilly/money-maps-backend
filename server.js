@@ -5,7 +5,13 @@ var express = require('express'),
 
 var app = express();
 
-app.get('/contribution/:slug/:year/:location', function(req, res){
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
+app.get('/contribution/:slug/:year/:location', function(req, res, next){
   var searchTerms = {
     slug: req.params.slug,
     year: req.params.year
