@@ -30,6 +30,27 @@ app.get('/contribution/:slug/:year/:location', function(req, res, next){
   });
 });
 
+app.get('loaddata/:key', function(req, res, next) {
+  if (req.params.key === process.env.LOAD_KEY) {
+    loadData();
+    res.send('Data loaded successfully!');
+  } else {
+    res.send('Data has already been loaded.');
+  }
+});
+
+var loaded = 0;
+
+function loadData() {
+  if (!loaded) {
+    var contributions = require('./data/contributions.json');
+
+    Contribution.collection.insert(contributions, {}, function(err){
+      console.log(err);
+    });
+  }
+}
+
 var port = process.env.PORT || 3000;
 app.listen(port);
 
