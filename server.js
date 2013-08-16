@@ -23,6 +23,7 @@ app.get('/contribution/:slug/:year/:location', function(req, res, next){
     searchTerms.ward = req.params.location;
   } else {
     searchTerms.county = req.params.location;
+    searchTerms.state = 'pa';
   }
 
   Contribution.find(searchTerms, function(err, docs) {
@@ -30,16 +31,19 @@ app.get('/contribution/:slug/:year/:location', function(req, res, next){
   });
 });
 
-app.get('loaddata/:key', function(req, res, next) {
-  if (req.params.key === process.env.LOAD_KEY) {
+var loaded = 0;
+
+app.get('/loaddata/:key', function(req, res, next) {
+  if (req.params.key === process.env.LOAD_KEY && loaded === 0) {
     loadData();
     res.send('Data loaded successfully!');
-  } else {
+    loaded = 1;
+  } else if (req.params.key === process.env.LOAD_KEY && loaded === 1){
     res.send('Data has already been loaded.');
+  } else {
+    res.send('Incorrect load key.');
   }
 });
-
-var loaded = 0;
 
 function loadData() {
   if (!loaded) {
