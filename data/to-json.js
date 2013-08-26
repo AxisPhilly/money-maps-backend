@@ -11,14 +11,24 @@ csv()
       data.date = data.year;
     }
 
+    if(!data.county) {
+      data.county = '';
+    }
+
+    if(!data.state) {
+      data.state = '';
+    }
+
     var fDate = moment(data.date).format('L');
+    var fCounty = data.county.toLowerCase();
+    var fState = data.state.toLowerCase();
 
     var item = {
       slug: data.slug,
       year: Number(data.year),
       ward: Number(data.ward),
-      county: data.county,
-      state: states[data.state],
+      county: fCounty,
+      state: fState,
       amount: Number(data.amount),
       date: fDate,
       contributor: data.contributor
