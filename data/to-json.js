@@ -19,6 +19,10 @@ csv()
       data.state = '';
     }
 
+    if(!data.muni) {
+      data.muni = '';
+    }
+
     var fDate = moment(data.date).format('L');
     var fCounty = data.county.toLowerCase();
     var fState = data.state.toLowerCase();
@@ -27,6 +31,8 @@ csv()
       slug: data.slug,
       year: Number(data.year),
       ward: Number(data.ward),
+      muni: data.muni,
+      title: data.title,
       county: fCounty,
       state: fState,
       amount: Number(data.amount),

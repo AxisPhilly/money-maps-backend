@@ -9,6 +9,8 @@ var Contribution = new Schema({
   slug: { type: String, required: true },
   year: { type: Number, required: true },
   ward: { type: Number, required: false },
+  muni: { type: String, required: false },
+  title: { type: String, require: false },
   county: { type: String, required: false },
   state: { type: String, required: true },
   amount: { type: Number, required: true },
